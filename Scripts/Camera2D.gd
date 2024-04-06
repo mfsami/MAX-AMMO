@@ -18,7 +18,6 @@ var center_pos = position
 
 
 func _ready():
-	zoom = notZoomed
 	set_process(true)
 	randomize()
 
@@ -36,12 +35,7 @@ func _process(delta):
 	target_pos = target_pos.clamp	(center_pos - Vector2(MAX_DISTANCE, MAX_DISTANCE),center_pos + Vector2(MAX_DISTANCE, MAX_DISTANCE))
 	
 	position = target_pos
-	
-	if isZoomed:
-		position = position.lerp(zoomTargetPosition, delta * 5)
-	
-	else:
-		position = position.lerp(Vector2.ZERO, delta * 5)
+
 	
 func _input(event):
 			
