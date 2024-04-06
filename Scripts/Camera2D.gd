@@ -17,15 +17,6 @@ var target_distance = 0 #Distance from the player to the point the camera is cen
 var center_pos = position
 
 
-# Variables for camera zoom
-
-var notZoomed = Vector2(1, 1)
-var zoomed = Vector2(2, 2)
-var zoomTargetPosition : Vector2
-var isZoomed = false
-
-
-
 func _ready():
 	zoom = notZoomed
 	set_process(true)
@@ -53,27 +44,10 @@ func _process(delta):
 		position = position.lerp(Vector2.ZERO, delta * 5)
 	
 func _input(event):
-	
-	if event is InputEventMouseButton:
-		
-		if event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
-			zoom_to_mouse()
-			isZoomed = true
-			
-		elif event.button_index == MOUSE_BUTTON_RIGHT and not event.pressed:
-			zoom = notZoomed
-			isZoomed = false
-			position = Vector2.ZERO
 			
 	if event is InputEventMouseMotion:
 		target_distance = center_pos.distance_to(get_local_mouse_position()) / 2
 		
-func zoom_to_mouse():
-	zoom = zoomed
-	# Calculate the target position for the zoom
-	var mouse_in_world = get_global_mouse_position()
-	var player_pos = player.global_position
-	zoomTargetPosition = player_pos.lerp(mouse_in_world, 0.5) - player_pos
 	
 	
 	
